@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>video-search.html</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- <h1 id="h1">YOUTUBE</h1>   -->
+
+    <div id="navbar">
+        <a href="#" class="menu-bars" id="show-menu">
+            <i class="fas fa-bars"></i>
+        </a>
+    </div>
+    <nav id="nav-menu">
+        <ul class="nav-menu-items">
+            <div id="navbar-toggle">
+                <a href="#" class="menu-bars" id="hide-menu">
+                    <i class="fas fa-bars nav-icon"></i>
+                </a>
+                <a href="">
+                    <h1><i class="fab fa-youtube " id="youtube-logo"></i>YouTube</h1>
+                </a>
+                
+               
+                   <h1>  
+                    <input type="text" id="search" placeholder="Search" >
+                  <button> <i class="fa fa-search" aria-hidden="true" onclick="searchVideos()"></i> </button>  
+                    <i class="fas fa-microphone"></i>
+                   </h1>
+                   <!-- apenduserdiv -->
+                   <div id="circle_name">
+                    <div id="user"></div>
+                   </div>
+                  
+
+                <a href="">
+                    <h1> <i class="fa fa-video"></i></h1>
+             
+                </a>
+             <a href="">
+                <h1> <i class="fas fa-border-none"></i></h1>
+            </a>
+            <a href="">
+                <h1> <i class="fas fa-bell"></i></h1>
+            </a>
+            <a href="">
+                <h1><img src="https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/img.jpg" alt="" id="img">
+                </h1>
+            </a>
+                 
+            </div>
+            
+            <hr />
+            <div class="nav-section">
+
+                <li class="nav-text">
+                    <a href="y1.html">
+                        <i class="fas fa-home nav-icon "></i>
+                        Home
+                    </a>
+                </li>
+                <li class="nav-text">
+                    <a href="y1.html">
+                        <i class="fas fa-fire nav-icon "></i>
+                        Trendings
+                    </a>
+                </li>
+                <li class="nav-text">
+                    <a href="y1.html">
+                        <i class="fab fa-youtube nav-icon "></i>
+                        Subscriptions
+                    </a>
+                </li>
+
+            </div>
+
+            <hr />
+
+            <div class="nav-section">
+
+                <li class="nav-text">
+                    <a href="y1.html">
+                        <i class="fas fa-play-circle nav-icon "></i>
+                        Library
+                    </a>
+                </li>
+                <li class="nav-text">
+                    <a href="">
+                        <i class="fas fa-history nav-icon "></i>
+                        History
+                    </a>
+                </li>
+                <li class="nav-text">
+                    <a href="y1.html">
+                        <i class="fas fa-clock nav-icon "></i>
+                        WatchLater
+                    </a>
+                </li>
+
+            </div>
+
+            <hr />
+            
+            <div class="nav-section">
+            
+                <li class="nav-text">
+                    <a href="y1signup.html">
+                        <i class="fas fa-play-circle nav-icon "></i>
+                        Create Channel
+                    </a>
+                </li>
+                <li class="nav-text">
+                    <a href="y1sigin.html">
+                        <i class="fas fa-user-circle"></i>
+                        SignIn
+                    </a>
+                </li>
+                <li class="nav-text">
+                    <a href="y1signup.html">
+                        <i class="fas fa-user-circle"></i>
+                        SignUp
+                    </a>
+                </li>
+            
+            </div>
+
+            <hr />
+            
+            <div class="nav-section">
+            
+                <li class="nav-text">
+                    <a href="">
+                        <i class="fas fa-play-circle nav-icon "></i>
+                        PlayList
+                    </a>
+                </li>
+            </div>
+
+        </ul>
+    </nav>
+    <div class="flex-box">
+
+      <div id="button-box">
+
+      <li class="litag"><a href="video.html"><button><h3>All</h3></button></li></a>
+      <li class="litag"><a href="video.html"><button><h3>Mixses</h3></button></li></a> 
+      <li class="litag"><a href="video.html"><button><h3>BollywoodMusic</h3></button></li></a> 
+      <li class="litag"><a href="video.html"> <button><h3>Javascript</h3></button></li></a>
+      <li class="litag"><a href="video.html"><button><h3>DSAlgoExpert</h3></button></li></a> 
+      <li class="litag"><a href="video.html"><button><h3>KhanaKhajana</h3></button></li></a> 
+      <li class="litag"><a href="video.html"><button><h3>MasaiSchool</h3></button></li></a> 
+      <li class="litag"><a href="video.html"><button><h3>Viral</h3></button></li></a> 
+      <li class="litag"><a href="video.html"> <button><h3>IndiaNews</h3></button></li></a>
+
+      </div>
+    </div>
+   
+    <div id="result_box">
+        <div id="search_results"></div>
+    </div>
+   
+   
+    
+</body>
+</html>
+
+<script>
+    //https://youtube.googleapis.com/youtube/v3/search?q=tesla&key=[YOUR_API_KEY]
+
+    let API = "AIzaSyAYpJQUUQrsVnGbv8NXKkAiOttR8IK_wh4";
+
+    let search_results_div = document.getElementById("search_results");
+
+    async function searchVideos() {
+        try {
+            let inp = document.getElementById("search").value;
+
+            let res = await fetch(
+                `https://youtube.googleapis.com/youtube/v3/search?q=${inp}&key=${API}&type=video&maxResults=30&part=snippet`
+            );
+
+            let data = await res.json();
+            console.log("data:", data);
+
+            let array_of_videos = data.items;
+
+            appendVideos(array_of_videos);
+        } catch (err) {
+            console.log("err:", err);
+        }
+    }
+
+    const appendVideos = (arr) => {
+        arr.forEach(({ snippet, id: { videoId } }) => {
+            console.log("snippet", snippet);
+            let div = document.createElement("div");
+            let url = snippet.thumbnails.medium.url;
+            let img = document.createElement("img");
+
+            img.src = url;
+            let title = snippet.title;
+            let h4 = document.createElement("h4");
+            h4.innerText = title;
+
+            let video_data = {
+                snippet,
+                videoId,
+            };
+
+            div.onclick = () => {
+                showVideo(video_data);
+            };
+
+
+
+            // let iframe = document.createElement("iframe");
+            // iframe.src = `https://www.youtube.com/embed/${videoId}`;
+            // iframe.width = "460px";
+            // iframe.height = "260px";
+            // //iframe.allowfullscreen = "true";
+
+            // iframe.setAttribute("allowfullscreen", true);
+
+            div.append(img, h4);
+
+            search_results_div.append(div);
+        });
+    };
+
+    // expection click on video 
+    // expection play on next page
+
+    // function showVideo() {
+    // alert("click on video")
+    // }
+    const showVideo = (video_data) => {
+        alert("click on video");
+        console.log("video_data", video_data)
+
+        localStorage.setItem("click_video", JSON.stringify(video_data));
+
+        // window.location.href="video.html";
+
+        window.open("video.html");
+
+
+    }
+
+    var new_data = JSON.parse(localStorage.getItem("login"))
+    console.log("new_data",new_data);
+   
+    let user_div = document.getElementById("user");
+    let div = document.createElement("div");
+    user_div.appendChild(div);
+
+    let username1 = document.createElement("p");
+    username1.innerText = "welcome on YouTube " + new_data.username;
+
+    div.append(username1);
+
+</script>

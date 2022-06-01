@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signin.html</title>
+    <style>
+        #container {
+            display: flex;
+            margin: auto;
+            background-color: wheat;
+            border: 1px solid red;
+            width: 400px;
+            height: 650px;
+            margin-top: 100px;
+            padding-right: 70px;
+
+        }
+
+        #container:hover {
+            background-color: coral;
+            cursor: pointer;
+            text-transform: uppercase;
+            text-shadow: transparent;
+        }
+
+        .form {
+            width: 50%;
+            margin: auto;
+            margin-top: 50px;
+            font-size: 20px;
+            font-family: 'oswald', sans-serif;
+            font-size: 20px;
+        }
+
+        #register {
+            margin: auto;
+            text-align: center;
+            font-family: 'oswald', sans-serif;
+            font-size: 30px;
+            margin-bottom: 10px;
+            margin-top: 50px;
+            padding-left: 80px;
+        }
+
+        .input {
+            padding: 10px 10px 10px 10px;
+            font-family: 'oswald', sans-serif;
+            font-size: 20px;
+        }
+
+        #btn {
+            border-radius: 30px;
+            margin-left: 170px;
+            margin-top: 50px;
+            font-size: 30px;
+            font-family: 'oswald', sans-serif;
+            background-color: #fff;
+            color: black;
+        }
+
+        .placeholder:hover {
+            text-transform: uppercase;
+            text-shadow: transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+
+        <div id="register1">
+            <h1 id="register">Register</h1>
+            <form action="" class="form">
+                <label for="">Enter Name</label>
+                <input type="text" id="name" placeholder="Name" class="input">
+                <label for="">Enter Email Id</label>
+                <input type="email" id="email" placeholder="Provide Proper Email format" class="input">
+                <label for="">Enter Username</label>
+                <input type="text" id="username" placeholder="Set Proper Username" class="input">
+                <label for="">Enter Password</label>
+                <input type="password" id="password" placeholder="Put Corect Password" class="input">
+                <label for="">Enter Mobile Number</label>
+                <input type="number" id="mobile" placeholder="Enter Correct Mobile Number" class="input">
+                <label for="">Enter Description</label>
+                <input type="text" id="description" placeholder="Add some Description" class="input">
+            </form>
+            <button onclick="Register()" id="btn">Signup</button>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+
+    async function Register() {
+
+        // we have to built authentication sytem so we have to get data
+        // store data in object
+        // strigify data
+
+        // step 1 create data object
+
+        let signup_data = {
+
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            password: document.getElementById("password").value,
+            username: document.getElementById("username").value,
+            mobile: document.getElementById("mobile").value,
+            description: document.getElementById("description").value,
+
+        }
+        // step2 stringify data
+        signup_data = JSON.stringify(signup_data);
+        console.log("signup_data", signup_data);
+
+        // step 3 send request to the server check input data available with server or not
+
+        let register_api = `https://masai-api-mocker.herokuapp.com/auth/register`
+
+        // step 3.1 fetch data here not get data we just post data to server
+
+
+        let response = await fetch(register_api, {
+
+            method: "POST",
+            body: signup_data,
+
+            headers: {                // headers meta data of meta data
+
+                "Content-Type": "application/json",
+
+            },
+
+        });
+
+        let data = await response.json();
+        console.log("data", data);
+        alert("succsessfullly sign up ")
+        window.open("y1sigin.html");
+    }
+    // until your register function are done next step you have to login
+</script>
+
+<!-- // corse error https://chrome.google.com/webstore/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino this extension solve ther eroor of corse policy
+masai school api link https://github.com/masai-school/api-mocker/wiki/Authentication-API 
+
+following above step you have to make authentication system -->

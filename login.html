@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login.html</title>
+    <style>
+        #container {
+            display: flex;
+            margin: auto;
+            background-color: wheat;
+            border: 1px solid red;
+            width: 400px;
+            height: 400px;
+            margin-top: 100px;
+            padding-right: 70px;
+
+        }
+
+        #container:hover {
+            background-color: coral;
+            cursor: pointer;
+            text-transform: uppercase;
+            text-shadow: transparent;
+        }
+
+        .form {
+            width: 50%;
+            margin: auto;
+            margin-top: 50px;
+            font-size: 20px;
+            font-family: 'oswald', sans-serif;
+            font-size: 20px;
+        }
+
+        #register {
+            margin: auto;
+            text-align: center;
+            font-family: 'oswald', sans-serif;
+            font-size: 30px;
+            margin-bottom: 10px;
+            margin-top: 50px;
+            padding-left: 80px;
+        }
+
+        .input {
+            padding: 10px 10px 10px 10px;
+            font-family: 'oswald', sans-serif;
+            font-size: 20px;
+        }
+
+        .inputplaceholder {
+            padding: 10px 10px 10px 10px;
+            font-family: 'oswald', sans-serif;
+            font-size: 20px;
+        }
+
+        .inputplaceholder:hover {
+            text-transform: uppercase;
+            text-shadow: transparent;
+        }
+
+        #btn {
+            border-radius: 30px;
+            margin-left: 180px;
+            margin-top: 50px;
+            font-size: 30px;
+            font-family: 'oswald', sans-serif;
+            background-color: #fff;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="login">
+            <h1 id="register">Log-In</h1>
+            <form action="" class="form">
+                <label for="">Enter Username</label>
+                <input type="text" id="username" placeholder="set proper username" class="input">
+                <label for="">Enter Password</label>
+                <input type="password" id="password" placeholder="put corect password" class="input">
+            </form>
+            <button onclick="Login()" id="btn">logIn</button>
+        </div>
+
+    </div>
+</body>
+
+</html>
+<script>
+    // step 1 create login function
+    //var arr = JSON.parse(localStorage.getItem("login"))||[];
+    async function Login() {
+        // step 1.1 create object 
+
+        let login_data = {
+
+            username: document.getElementById("username").value,
+            password: document.getElementById("password").value,
+
+        };
+        // step 2 stringify data 
+        login_data = JSON.stringify(login_data);
+        // create url step 2.1
+
+        let login_api = `https://masai-api-mocker.herokuapp.com/auth/login`;
+
+        // make fetch request 
+
+        let response = await fetch(login_api, {
+
+            method: "POST",
+            body: login_data,     //login data from line number 110;
+
+            headers: {                // headers meta data of meta data
+
+                "Content-Type": "application/json",
+
+            },
+
+        });
+
+        let data = await response.json();
+        console.log("data", data);
+
+        let username = document.getElementById("username").value;
+        getProfile(username, data.token);
+
+    }
+    // until we getting correct singup and login part 
+    // get profile back the two things always changing username and token 
+    async function getProfile(username, token) {
+
+        let profile_url = `https://masai-api-mocker.herokuapp.com/user/${username}`;
+
+        // if we want to send data to server always write post method in fetch
+        // if we want to get data back from server write only fetchg becuase fetch is defualt get method
+        // make sure you are always use headers here
+
+        let response = await fetch(profile_url, {
+
+            headers: {                // headers meta data of meta data
+
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,     // token from line number 136
+
+            },
+
+        });
+
+        let data = await response.json();
+        console.log("data", data);
+        alert("Log-In succsessfully Go to Home Page")
+        
+        localStorage.setItem("login",JSON.stringify(data));
+
+        window.open("y1.html");
+    }
+
+    // until we done all process
+
+   
+</script>
